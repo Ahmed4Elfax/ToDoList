@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.android.todolist.Adapters.RecyclerItemTouchHelper;
 import com.example.android.todolist.Adapters.ToDoAdapter;
 import com.example.android.todolist.Models.ToDoModel;
 import com.example.android.todolist.Utils.DatabaseHandler;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
     private List<ToDoModel> taskList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,9 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         tasksAdapter = new ToDoAdapter(db,MainActivity.this);
         tasksRecyclerView.setAdapter(tasksAdapter);
 
-
+        ItemTouchHelper itemTouchHelper = new
+                ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
+        itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
 
         fab = findViewById(R.id.fab);
 
